@@ -22,7 +22,10 @@ if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
       {
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-       callbackURL: 'http://localhost:5000/api/auth/google/callback',
+       callbackURL:
+  process.env.NODE_ENV === "production"
+    ? "https://chatweb-1-qi1j.onrender.com/api/auth/google/callback"
+    : "http://localhost:5000/api/auth/google/callback",
         proxy: true
       },
       async (accessToken, refreshToken, profile, done) => {
